@@ -44,7 +44,7 @@ def loginUser(username, password):
     """
     Log in for user, returns true if login successful, false if login failed
     """
-    return True
+    return False
 
 def createAccount(username, password):
     """
