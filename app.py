@@ -5,11 +5,19 @@ Driver for Command Line a loop where each iteration is a action from the user
 """
 
 logged_in = False
+trys = 3
+print("Log into App\nYou have 3 tries\n")
 
-while not logged_in:
+while not logged_in and trys > 0:
+    print("\nAttempts left: ", trys)
     logged_in = main()
+    trys -= 1
 
-user_input_number = -1
+if trys == 0 and not logged_in:
+    print("\nAll attempts exhausted\nLogin failed")
+    user_input_number = 0
+else:
+    user_input_number = -1
 
 while user_input_number != 0:
     if user_input_number == 1:
@@ -36,4 +44,4 @@ while user_input_number != 0:
         user_input_number = int(user_input_number)
     print("\n")
 
-print("All changes saved\nBye!")
+print("\nAll changes saved\nBye!")

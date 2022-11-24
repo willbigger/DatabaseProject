@@ -2,7 +2,7 @@ def main():
     """
     returns true if successful, false otherwise
     """
-    print("Choose a number \n1: Login \n2: Create an account\n\n")
+    print("Choose a number \n1: Login \n2: Create an account\n")
     user_input_number = input("Enter a number: ")
     print("\n")
 
