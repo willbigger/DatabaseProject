@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 20, 2022 at 11:43 PM
--- Server version: 10.6.7-MariaDB-2ubuntu1.1
--- PHP Version: 8.1.2
+-- Host: 127.0.0.1
+-- Generation Time: Nov 24, 2022 at 03:44 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,22 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wmb8yt`
+-- Database: `movie_database`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `actor`
---
-
-CREATE TABLE `actor` (
-  `actorFirstName` varchar(50) NOT NULL,
-  `actorLastName` varchar(50) NOT NULL,
-  `gender` varchar(10) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `nationality` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,19 +30,6 @@ CREATE TABLE `actor` (
 CREATE TABLE `authored_by` (
   `userID` int(11) NOT NULL,
   `reviewID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `director`
---
-
-CREATE TABLE `director` (
-  `firstName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `birthday` date DEFAULT NULL,
-  `nationality` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90372,22 +90345,10 @@ CREATE TABLE `user_profile` (
 --
 
 --
--- Indexes for table `actor`
---
-ALTER TABLE `actor`
-  ADD PRIMARY KEY (`actorFirstName`,`actorLastName`);
-
---
 -- Indexes for table `authored_by`
 --
 ALTER TABLE `authored_by`
   ADD PRIMARY KEY (`userID`,`reviewID`);
-
---
--- Indexes for table `director`
---
-ALTER TABLE `director`
-  ADD PRIMARY KEY (`firstName`,`lastName`);
 
 --
 -- Indexes for table `directs_movie`
