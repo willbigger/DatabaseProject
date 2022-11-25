@@ -106,7 +106,7 @@ def deleteUserProfile():
     cursor.execute(deleteQuery)
     conn.commit()
 
-    #Deletes profile
+    #Deletes favorite movie
     deleteQuery = "DELETE FROM favorite_movie WHERE userID = " + str(userID)
     cursor.execute(deleteQuery)
     conn.commit()
