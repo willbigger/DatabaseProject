@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2022 at 03:44 PM
+-- Generation Time: Nov 25, 2022 at 02:40 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -577,6 +577,32 @@ CREATE TABLE `genre` (
   `genreName` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `genre`
+--
+
+INSERT INTO `genre` (`genreName`, `description`) VALUES
+('Action', NULL),
+('Adventure', NULL),
+('Animation', NULL),
+('Comedy', NULL),
+('Crime', NULL),
+('Documentary', NULL),
+('Drama', NULL),
+('Family', NULL),
+('Fantasy', NULL),
+('Foreign', NULL),
+('History', NULL),
+('Horror', NULL),
+('Music', NULL),
+('Mystery', NULL),
+('Romance', NULL),
+('Science Fiction', NULL),
+('Thriller', NULL),
+('TV Movie', NULL),
+('War', NULL),
+('Western', NULL);
 
 -- --------------------------------------------------------
 
