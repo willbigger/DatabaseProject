@@ -1,22 +1,27 @@
-import genre, movie, directs_movie, movie_actor, movie_genre, user_profile
+import genre, movie, directs_movie, movie_actor, movie_genre, user_profile, userlogin
 """
 Driver for Command Line a loop where each iteration is a action from the user
 """
 
 logged_in = False
 trys = 3
+main_list = []
 print("Log into App\nYou have 3 tries\n")
 
 while not logged_in and trys > 0:
     print("\nAttempts left: ", trys)
-    logged_in = main()
+    main_list = userlogin.main()
+    logged_in = main_list[0]
     trys -= 1
 
 if trys == 0 and not logged_in:
     print("\nAll attempts exhausted\nLogin failed")
     user_input_number = 0
 else:
+    current_user_email = main_list[1]
     user_input_number = -1
+
+print("\nCurrent user email: " + current_user_email + "\n")
 
 while user_input_number != 0:
     if user_input_number == 1:

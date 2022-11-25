@@ -44,8 +44,7 @@ def viewUserProfiles():
     cursor.close()
     conn.close()
 
-def addUserProfile():
-    email = input("Please enter your email: ")
+def addUserProfile(email):
     firstName = input("Please enter your first name: ")
     lastName = input("Please enter your last name: ")
     favoriteActor = input("Please enter your favorite actor: ")
