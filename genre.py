@@ -1,8 +1,12 @@
-#Inspired by https://realpython.com/python-mysql and https://www.geeksforgeeks.org/extract-data-from-database-using-mysql-connector-and-xampp-in-python
-
+'''
+Inspired by:
+https://realpython.com/python-mysql 
+https://www.geeksforgeeks.org/extract-data-from-database-using-mysql-connector-and-xampp-in-python
+https://www.w3schools.com/python/python_mysql_insert.asp
+'''
 import mysql.connector
 
-def viewGenre():
+def viewGenres():
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
@@ -12,12 +16,13 @@ def viewGenre():
     cursor = conn.cursor()
 
     #Gets all data from genre
-    query = "SELECT * from genre"
+    query = "SELECT * FROM genre"
     cursor.execute(query)
     
     table = cursor.fetchall()
     
     print("Movie genres:")
+    print("Genre    Description")
     for row in table:
         print(row[0], end=": ")
         print(row[1], end="\n")
@@ -25,7 +30,6 @@ def viewGenre():
     cursor.close()
     conn.close()
 
-#https://www.w3schools.com/python/python_mysql_insert.asp
 def addGenre():
     genreName = input("Please enter the genre name: ")
     description = input("Please enter the genre description: ")
@@ -38,7 +42,7 @@ def addGenre():
 
     cursor = conn.cursor()
 
-    #Gets all data from genre
+    #Inserts genre
     query = "INSERT INTO genre (genreName, description) VALUES (%s, %s)"
 
     values = (genreName, description)
