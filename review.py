@@ -4,9 +4,9 @@ https://realpython.com/python-mysql
 https://www.geeksforgeeks.org/extract-data-from-database-using-mysql-connector-and-xampp-in-python
 https://www.w3schools.com/python/python_mysql_insert.asp
 '''
-import mysql.connector
+import mysql.connector, datetime
 
-def viewUserProfiles():
+def viewReviews():
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
@@ -19,12 +19,12 @@ def viewUserProfiles():
 
     cont = ""
 
-    print("User Profiles:")
-    print("User ID    Email    First Name    Last Name    Favorite Actor    Favorite Director")
+    print("Reviews:")
+    print("Review ID    Movie ID    Write Date    Number Rating    Comment Text    Number of Likes")
     
-    #Gets all data from user_profile in increments of 50
+    #Gets all data from review in increments of 50
     while cont != 'q':
-        query = "SELECT * FROM user_profile ORDER BY userID LIMIT 50 OFFSET " + str(offset)
+        query = "SELECT * FROM review ORDER BY reviewID LIMIT 50 OFFSET " + str(offset)
         
         cursor.execute(query)
         
@@ -44,11 +44,11 @@ def viewUserProfiles():
     cursor.close()
     conn.close()
 
-def addUserProfile(email):
-    firstName = input("Please enter your first name: ")
-    lastName = input("Please enter your last name: ")
-    favoriteActor = input("Please enter your favorite actor: ")
-    favoriteDirector = input("Please enter your favorite director: ")
+def addReview():
+    userID = input("Please enter your user ID: ")
+    movieID = input("Please enter movie ID: ")
+    numberRating = input("Please enter your rating number on a scale of 1-10: ")
+    commentText = input("Please enter your comments: ")
 
     conn = mysql.connector.connect(
         host = "localhost",
@@ -58,7 +58,7 @@ def addUserProfile(email):
 
     cursor = conn.cursor()
 
-    countQuery = "SELECT COUNT(*) FROM user_profile"
+    countQuery = "SELECT COUNT(*) FROM review"
     cursor.execute(countQuery)
     
     #checks if table is empty
@@ -66,27 +66,34 @@ def addUserProfile(email):
         newID = 1
     else:
         #calculates a new ID for the new entry
-        lastIDQuery = "SELECT userID FROM user_profile ORDER BY userID DESC LIMIT 1"
+        lastIDQuery = "SELECT reviewID FROM review ORDER BY reviewID DESC LIMIT 1"
         cursor.execute(lastIDQuery)
         newID = cursor.fetchall()[0][0] + 1
-    
-    print("Your user ID is: " + str(newID))
-    
-    #Adds movie
-    insertQuery = "INSERT INTO user_profile (userID, email, firstName, lastName, favoriteActor, favoriteDirector) VALUES (%s, %s, %s, %s, %s, %s)"
+        
+    #Adds review
+    insertQuery = "INSERT INTO review (reviewID, movieID, writeDate, numberRating, commentText, numberOfLikes) VALUES (%s, %s, %s, %s, %s, %s)"
 
-    values = (newID, email, firstName, lastName, favoriteActor, favoriteDirector)
+    values = (newID, movieID, datetime.datetime.now(), numberRating, commentText, 0)
+    cursor.execute(insertQuery, values)
+
+    conn.commit()
+
+    #Adds to author_by
+    insertQuery = "INSERT INTO authored_by (userID, reviewID) VALUES (%s, %s)"
+
+    values = (userID, newID)
     cursor.execute(insertQuery, values)
 
     conn.commit()
     
-    print("Welcome new user!")
+    print("Review added!")
     
     cursor.close()
     conn.close()
 
-def deleteUserProfile():
+def deleteReview():
     userID = input("Please enter your user ID: ")
+    reviewID = input("Please enter your review ID: ")
 
     conn = mysql.connector.connect(
         host = "localhost",
@@ -95,35 +102,26 @@ def deleteUserProfile():
         database = "movie_database")
 
     cursor = conn.cursor()
+    
+    #Deletes review
+    deleteQuery = "DELETE FROM review WHERE reviewID = " + str(reviewID)
+    cursor.execute(deleteQuery)
+    conn.commit()
 
     #Deletes author
     deleteQuery = "DELETE FROM authored_by WHERE userID = " + str(userID)
     cursor.execute(deleteQuery)
     conn.commit()
-
-    #Deletes favorite genre
-    deleteQuery = "DELETE FROM favorite_genre WHERE userID = " + str(userID)
-    cursor.execute(deleteQuery)
-    conn.commit()
-
-    #Deletes profile
-    deleteQuery = "DELETE FROM favorite_movie WHERE userID = " + str(userID)
-    cursor.execute(deleteQuery)
-    conn.commit()
-
-    #Deletes profile
-    deleteQuery = "DELETE FROM user_profile WHERE userID = " + str(userID)
-    cursor.execute(deleteQuery)
-    conn.commit()
     
-    print("User deleted!")
+    print("Review deleted!")
     
     cursor.close()
     conn.close()
 
-def updateFavoriteActor():
-    userID = input("Please enter your user ID: ")
-    favoriteActor = input("Please enter your new favorite actor: ")
+def updateReview():
+    reviewID = input("Please enter your review ID: ")
+    numberRating = input("Please enter your review number rating update: ")
+    commentText = input("Please enter your review comment update: ")
 
     conn = mysql.connector.connect(
         host = "localhost",
@@ -133,21 +131,20 @@ def updateFavoriteActor():
 
     cursor = conn.cursor()
 
-    #Updates favorite actor
-    query = "UPDATE user_profile SET favoriteActor = '" + favoriteActor + "' WHERE userID = " + str(userID)
+    #Updates review
+    query = "UPDATE review SET numberRating = '" + numberRating + "', commentText = '" + commentText + "' WHERE reviewID = " + str(reviewID)
 
     cursor.execute(query)
 
     conn.commit()
     
-    print("Favorite actor updated!")
+    print("Review updated!")
     
     cursor.close()
     conn.close()
 
-def updateFavoriteDirector():
-    userID = input("Please enter your user ID: ")
-    favoriteDirector = input("Please enter your new favorite director: ")
+def likeReview():
+    reviewID = input("Please enter the review ID: ")
 
     conn = mysql.connector.connect(
         host = "localhost",
@@ -157,14 +154,18 @@ def updateFavoriteDirector():
 
     cursor = conn.cursor()
 
-    #Updates favorite director
-    query = "UPDATE user_profile SET favoriteDirector = '" + favoriteDirector + "' WHERE userID = " + str(userID)
+    getLikeQuery = "SELECT numberOfLikes FROM review WHERE reviewID = " + str(reviewID)
+    cursor.execute(getLikeQuery)
+    newNumberOfLikes = cursor.fetchall()[0][0] + 1
+
+    #Adds a like
+    query = "UPDATE review SET numberOfLikes = " + str(newNumberOfLikes) + " WHERE reviewID = " + str(reviewID)
 
     cursor.execute(query)
 
     conn.commit()
     
-    print("Favorite director updated!")
+    print("Likes updated!")
     
     cursor.close()
     conn.close()
