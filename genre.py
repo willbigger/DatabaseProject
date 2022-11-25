@@ -21,7 +21,7 @@ def viewGenres():
     
     table = cursor.fetchall()
     
-    print("Movie genres:")
+    print("Movie Genres:")
     print("Genre    Description")
     for row in table:
         print(row[0], end=": ")
