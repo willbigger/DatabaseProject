@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2022 at 02:40 AM
+-- Generation Time: Nov 25, 2022 at 03:45 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -583,26 +583,26 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`genreName`, `description`) VALUES
-('Action', NULL),
-('Adventure', NULL),
-('Animation', NULL),
-('Comedy', NULL),
-('Crime', NULL),
-('Documentary', NULL),
-('Drama', NULL),
-('Family', NULL),
-('Fantasy', NULL),
-('Foreign', NULL),
-('History', NULL),
-('Horror', NULL),
-('Music', NULL),
-('Mystery', NULL),
-('Romance', NULL),
-('Science Fiction', NULL),
-('Thriller', NULL),
-('TV Movie', NULL),
-('War', NULL),
-('Western', NULL);
+('Action', 'A motion picture whose storyline involves fast-paced activity and conflict, usually including such elements as a heroic protagonist, violent fights, acrobatic stunts, chase scenes, and gunplay. (Wiktionary)'),
+('Adventure', 'They contain many of the same features of action movies, but are usually set in exotic locations. The main theme is adventure, with the characters often exploring places they have not been before or doing things they have not done before. (Wikipedia)'),
+('Animation', 'Animation is a method by which still figures are manipulated to appear as moving images. (Wikipedia)'),
+('Comedy', 'A drama of light and amusing character and typically with a happy ending (Merriam-Webster)'),
+('Crime', 'Crime fiction describes narratives that center on criminal acts and especially on the investigation, either by an amateur or a professional detective, of a crime, often a murder. (Wikipedia)'),
+('Documentary', 'A non-fictional motion-picture intended to \"document reality, primarily for the purposes of instruction, education or maintaining a historical record\". (Wikipedia)'),
+('Drama', 'Drama is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone. (Wikipedia)'),
+('Family', 'Movies that are safe for entire families to watch.'),
+('Fantasy', 'Fantasy films are films that belong to the fantasy genre with fantastic themes, usually magic, supernatural events, mythology, folklore, or exotic fantasy worlds. (Wikipedia)'),
+('Foreign', 'Movies from abroad, usually with subtitles or dubs so that the audience can understand.'),
+('History', 'Based on a historical narrative, often set in the medieval or early modern past. (Wikipedia)'),
+('Horror', 'Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. (Wikipedia)'),
+('Music', 'Musical film is a film genre in which songs by the characters are interwoven into the narrative, sometimes accompanied by dancing. (Wikipedia)'),
+('Mystery', 'A mystery film is a genre of film that revolves around the solution of a problem or a crime. (Wikipedia)'),
+('Romance', 'Romance movies involve romantic love stories recorded in visual media for broadcast in theatres or on television that focus on passion, emotion, and the affectionate romantic involvement of the main characters. (Wikipedia)'),
+('Science Fiction', 'Science fiction (sometimes shortened to Sci-Fi or SF) is a genre of speculative fiction which typically deals with imaginative and futuristic concepts. (Wikipedia)'),
+('Thriller', 'Thrillers are characterized and defined by the moods they elicit, giving viewers heightened feelings of suspense, excitement, surprise, anticipation and anxiety. (Wikipedia)'),
+('TV Movie', 'Movies that originate from TV shows.'),
+('War', 'War film is a film genre concerned with warfare, typically about naval, air, or land battles, with combat scenes central to the drama. (Wikipedia)'),
+('Western', 'The Western is a genre set in the American frontier and commonly associated with folk tales of the Western United States, particularly the Southwestern United States, as well as Northern Mexico and Western Canada. (Wikipedia)');
 
 -- --------------------------------------------------------
 
