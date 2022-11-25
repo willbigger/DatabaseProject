@@ -1,4 +1,4 @@
-import genre, movie, directs_movie, movie_actor, movie_genre, user_profile
+import genre, movie, directs_movie, movie_actor, movie_genre, user_profile, favorite_genre, favorite_movie, authored_by, review
 """
 Driver for Command Line a loop where each iteration is a action from the user
 """
@@ -19,8 +19,7 @@ while user_input_number != 0:
         print("Database information from database")
         print("-------------------------------------")
     elif user_input_number == 4:
-        user_profile.updateFavoriteDirector()
-
+        user_profile.deleteUserProfile()
     
     print("\n\nChoose a number \n0: Exit \n1: User login \n2: View profile (if currently logged in) \n3: View Movies\n\n")
     user_input_number = int(input("Enter a number: "))
