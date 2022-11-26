@@ -38,9 +38,8 @@ def viewAuthors():
         
     cursor.close()
     conn.close()
-'''
-def addAuthor():
-    userID = input("Please enter the user ID: ")
+
+def deleteAuthor(email):
     reviewID = input("Please enter the review ID: ")
 
     conn = mysql.connector.connect(
@@ -51,31 +50,10 @@ def addAuthor():
 
     cursor = conn.cursor()
 
-    #Inserts author
-    query = "INSERT INTO authored_by (userID, reviewID) VALUES (%s, %s)"
-
-    values = (userID, reviewID)
-    cursor.execute(query, values)
-
-    conn.commit()
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
     
-    print("Author added!")
-    
-    cursor.close()
-    conn.close()
-'''
-def deleteAuthor():
-    userID = input("Please enter the user ID: ")
-    reviewID = input("Please enter the review ID: ")
-
-    conn = mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        password = "",
-        database = "movie_database")
-
-    cursor = conn.cursor()
-
     #Deletes movie
     query = "DELETE FROM authored_by WHERE userID = '" + str(userID) + "' AND reviewID = '" + str(reviewID) + "'"
 

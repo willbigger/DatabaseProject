@@ -41,7 +41,7 @@ def viewActors():
         
     cursor.close()
     conn.close()
-
+'''
 def addActor():
     movieID = input("Please enter the movie ID: ")
     actorFirstName = input("Please enter the actor's first name: ")
@@ -67,3 +67,4 @@ def addActor():
     
     cursor.close()
     conn.close()
+'''

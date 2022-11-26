@@ -85,9 +85,7 @@ def addUserProfile(email):
     cursor.close()
     conn.close()
 
-def deleteUserProfile():
-    userID = input("Please enter your user ID: ")
-
+def deleteUserProfile(email):
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
@@ -95,6 +93,10 @@ def deleteUserProfile():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     #Deletes author
     deleteQuery = "DELETE FROM authored_by WHERE userID = " + str(userID)
@@ -115,14 +117,18 @@ def deleteUserProfile():
     deleteQuery = "DELETE FROM user_profile WHERE userID = " + str(userID)
     cursor.execute(deleteQuery)
     conn.commit()
+
+    #Deletes email
+    deleteQuery = "DELETE FROM user_passwords WHERE email = '" + str(email) + "'"
+    cursor.execute(deleteQuery)
+    conn.commit()
     
     print("User deleted!")
     
     cursor.close()
     conn.close()
 
-def updateFavoriteActor():
-    userID = input("Please enter your user ID: ")
+def updateFavoriteActor(email):
     favoriteActor = input("Please enter your new favorite actor: ")
 
     conn = mysql.connector.connect(
@@ -132,6 +138,11 @@ def updateFavoriteActor():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
+
 
     #Updates favorite actor
     query = "UPDATE user_profile SET favoriteActor = '" + favoriteActor + "' WHERE userID = " + str(userID)
@@ -145,8 +156,7 @@ def updateFavoriteActor():
     cursor.close()
     conn.close()
 
-def updateFavoriteDirector():
-    userID = input("Please enter your user ID: ")
+def updateFavoriteDirector(email):
     favoriteDirector = input("Please enter your new favorite director: ")
 
     conn = mysql.connector.connect(
@@ -156,6 +166,10 @@ def updateFavoriteDirector():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     #Updates favorite director
     query = "UPDATE user_profile SET favoriteDirector = '" + favoriteDirector + "' WHERE userID = " + str(userID)

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 25, 2022 at 09:31 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Nov 26, 2022 at 04:35 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -553,18 +553,6 @@ CREATE TABLE `favorite_genre` (
 CREATE TABLE `favorite_movie` (
   `userID` int(11) NOT NULL,
   `movieID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `friends`
---
-
-CREATE TABLE `friends` (
-  `name` varchar(30) NOT NULL,
-  `major` varchar(10) NOT NULL,
-  `year` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90378,12 +90366,6 @@ ALTER TABLE `favorite_genre`
 --
 ALTER TABLE `favorite_movie`
   ADD PRIMARY KEY (`userID`,`movieID`);
-
---
--- Indexes for table `friends`
---
-ALTER TABLE `friends`
-  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `genre`

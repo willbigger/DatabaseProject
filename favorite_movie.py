@@ -6,16 +6,18 @@ https://www.w3schools.com/python/python_mysql_insert.asp
 '''
 import mysql.connector
 
-def viewFavoriteMovies():
+def viewFavoriteMovies(email):
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
         password = "",
         database = "movie_database")
 
-    userID = input("Please enter the user ID: ")
-
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     offset = 0
 
@@ -40,8 +42,7 @@ def viewFavoriteMovies():
     cursor.close()
     conn.close()
 
-def addFavoriteMovies():
-    userID = input("Please enter the user ID: ")
+def addFavoriteMovies(email):
     movieID = input("Please enter the movieID: ")
 
     conn = mysql.connector.connect(
@@ -51,6 +52,10 @@ def addFavoriteMovies():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     #Inserts movie
     query = "INSERT INTO favorite_movie (userID, movieID) VALUES (%s, %s)"
@@ -65,8 +70,7 @@ def addFavoriteMovies():
     cursor.close()
     conn.close()
 
-def deleteFavoriteMovie():
-    userID = input("Please enter the user ID: ")
+def deleteFavoriteMovie(email):
     movieID = input("Please enter the movie ID: ")
 
     conn = mysql.connector.connect(
@@ -76,6 +80,10 @@ def deleteFavoriteMovie():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     #Deletes movie
     query = "DELETE FROM favorite_movie WHERE userID = '" + str(userID) + "' AND movieID = '" + str(movieID) + "'"

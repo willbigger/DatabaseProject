@@ -42,7 +42,9 @@ def viewDirectors():
     cursor.close()
     conn.close()
 
+'''
 def addDirector():
+    
     movieID = input("Please enter the movie ID: ")
     directorFirstName = input("Please enter the director's first name: ")
     directorLastName = input("Please enter the director's last name: ")
@@ -67,3 +69,4 @@ def addDirector():
     
     cursor.close()
     conn.close()
+'''

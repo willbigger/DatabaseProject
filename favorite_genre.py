@@ -6,16 +6,18 @@ https://www.w3schools.com/python/python_mysql_insert.asp
 '''
 import mysql.connector
 
-def viewFavoriteGenres():
+def viewFavoriteGenres(email):
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
         password = "",
         database = "movie_database")
 
-    userID = input("Please enter the user ID: ")
-
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     offset = 0
 
@@ -40,8 +42,7 @@ def viewFavoriteGenres():
     cursor.close()
     conn.close()
 
-def addFavoriteGenres():
-    userID = input("Please enter the user ID: ")
+def addFavoriteGenres(email):
     genreName = input("Please enter the genre: ")
 
     conn = mysql.connector.connect(
@@ -51,6 +52,10 @@ def addFavoriteGenres():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     #Inserts genre
     query = "INSERT INTO favorite_genre (userID, genreName) VALUES (%s, %s)"
@@ -65,8 +70,7 @@ def addFavoriteGenres():
     cursor.close()
     conn.close()
 
-def deleteFavoriteGenre():
-    userID = input("Please enter the user ID: ")
+def deleteFavoriteGenre(email):
     genreName = input("Please enter the genre: ")
 
     conn = mysql.connector.connect(
@@ -76,6 +80,10 @@ def deleteFavoriteGenre():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     #Deletes genre
     query = "DELETE FROM favorite_genre WHERE userID = '" + str(userID) + "' AND genreName = '" + str(genreName) + "'"
