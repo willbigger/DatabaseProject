@@ -20,45 +20,7 @@ def viewReviews():
     cont = ""
 
     print("Reviews:")
-    print("Review ID    Movie ID    Write Date    Number Rating    Comment Text    Number of Likes")
-    
-    #Gets all data from review in increments of 10
-    while cont != 'q':
-        query = "SELECT * FROM review ORDER BY reviewID LIMIT 10 OFFSET " + str(offset)
-        
-        cursor.execute(query)
-        
-        table = cursor.fetchall()
-        
-        for row in table:
-            print(row[0], end=": ")
-            print(row[1], end=" ")
-            print(row[2], end=" ")
-            print(row[3], end=" ")
-            print(row[4], end=" ")
-            print(row[5], end="\n")
-
-        cont = input("Enter \'q\' to quit, anything else to continue\n")
-        offset += 10
-        
-    cursor.close()
-    conn.close()
-
-def userViewReviews():
-    conn = mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        password = "",
-        database = "movie_database")
-
-    cursor = conn.cursor()
-
-    offset = 0
-
-    cont = ""
-
-    print("Reviews:")
-    print("Review ID    Movie    Write Date    Number Rating    Comment Text    Number of Likes")
+    print("Movie ID    Review ID    Movie    Write Date    Number Rating    Comment Text    Number of Likes")
     
     #Gets all data from review in increments of 10
     while cont != 'q':
@@ -70,6 +32,7 @@ def userViewReviews():
         
         for row in table:
             print(row[0], end=":    ")
+            print(row[1], end="    ")
             print(row[6], end="    ")
             print(row[2], end="    ")
             print(row[3], end="    ")
@@ -133,7 +96,7 @@ def addReview(email):
     conn.close()
 
 def deleteReview(email):
-    userViewReviews()
+    viewReviews()
     reviewID = input("Please enter your review ID: ")
 
     conn = mysql.connector.connect(
@@ -164,7 +127,7 @@ def deleteReview(email):
     conn.close()
 
 def updateReview():
-    userViewReviews()
+    viewReviews()
     reviewID = input("Please enter your review ID: ")
     numberRating = input("Please enter your review number rating update: ")
     commentText = input("Please enter your review comment update: ")
@@ -190,7 +153,7 @@ def updateReview():
     conn.close()
 
 def likeReview():
-    userViewReviews()
+    viewReviews()
     reviewID = input("Please enter the review ID: ")
 
     conn = mysql.connector.connect(
