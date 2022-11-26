@@ -115,7 +115,7 @@ def deleteReview(email):
     conn.commit()
 
     #Deletes author
-    deleteQuery = "DELETE FROM authored_by WHERE userID = " + str(userID)
+    deleteQuery = "DELETE FROM authored_by WHERE reviewID = " + str(reviewID)
     cursor.execute(deleteQuery)
     conn.commit()
     

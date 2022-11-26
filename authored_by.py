@@ -38,30 +38,3 @@ def viewAuthors():
         
     cursor.close()
     conn.close()
-
-def deleteAuthor(email):
-    reviewID = input("Please enter the review ID: ")
-
-    conn = mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        password = "",
-        database = "movie_database")
-
-    cursor = conn.cursor()
-
-    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
-    cursor.execute(userIDQuery)
-    userID = cursor.fetchall()[0][0]
-    
-    #Deletes movie
-    query = "DELETE FROM authored_by WHERE userID = '" + str(userID) + "' AND reviewID = '" + str(reviewID) + "'"
-
-    cursor.execute(query)
-
-    conn.commit()
-    
-    print("Author deleted!")
-    
-    cursor.close()
-    conn.close()
