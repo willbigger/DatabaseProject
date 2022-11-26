@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2022 at 06:33 AM
+-- Generation Time: Nov 26, 2022 at 02:44 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -90348,7 +90348,7 @@ DELIMITER ;
 
 CREATE TABLE `user_passwords_audit` (
   `email` varchar(50) NOT NULL,
-  `changedat` datetime DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
   `action` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
