@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2022 at 04:35 AM
+-- Generation Time: Nov 26, 2022 at 06:23 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -90322,6 +90322,34 @@ CREATE TABLE `review` (
 CREATE TABLE `user_passwords` (
   `email` varchar(40) NOT NULL,
   `password` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Triggers `user_passwords`
+--
+DELIMITER $$
+CREATE TRIGGER `user_passwords_delete` AFTER DELETE ON `user_passwords` FOR EACH ROW BEGIN
+	INSERT INTO user_passwords_audit VALUES (old.email, CURTIME(), 'Delete');
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `user_passwords_insert` AFTER INSERT ON `user_passwords` FOR EACH ROW BEGIN
+	INSERT INTO user_passwords_audit VALUES (new.email, CURTIME(), 'Add');
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_passwords_audit`
+--
+
+CREATE TABLE `user_passwords_audit` (
+  `email` varchar(50) NOT NULL,
+  `changedat` datetime DEFAULT NULL,
+  `action` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
