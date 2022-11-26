@@ -94,8 +94,7 @@ def addReview(email):
     cursor.close()
     conn.close()
 
-def deleteReview():
-    userID = input("Please enter your user ID: ")
+def deleteReview(email):
     reviewID = input("Please enter your review ID: ")
 
     conn = mysql.connector.connect(
@@ -105,6 +104,10 @@ def deleteReview():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
     
     #Deletes review
     deleteQuery = "DELETE FROM review WHERE reviewID = " + str(reviewID)
