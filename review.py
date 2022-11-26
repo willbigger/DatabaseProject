@@ -44,8 +44,7 @@ def viewReviews():
     cursor.close()
     conn.close()
 
-def addReview():
-    userID = input("Please enter your user ID: ")
+def addReview(email):
     movieID = input("Please enter movie ID: ")
     numberRating = input("Please enter your rating number on a scale of 1-10: ")
     commentText = input("Please enter your comments: ")
@@ -57,6 +56,10 @@ def addReview():
         database = "movie_database")
 
     cursor = conn.cursor()
+
+    userIDQuery = "SELECT userID FROM user_profile WHERE email = '" + email + "'"
+    cursor.execute(userIDQuery)
+    userID = cursor.fetchall()[0][0]
 
     countQuery = "SELECT COUNT(*) FROM review"
     cursor.execute(countQuery)
