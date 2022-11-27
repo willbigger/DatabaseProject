@@ -6,7 +6,7 @@ def main():
     """
     returns true if successful, false otherwise
     """
-    print("Choose a number \n1: Login \n2: Create an account\n")
+    print("Choose a number \n1: Log into existing account\n2: Create a new account\n")
     user_input_number = input("Enter a number: ")
     print("\n")
 
@@ -20,10 +20,10 @@ def main():
         input_username = input("Email: ")
         input_password = input("Password: ")
         if loginUser(input_username, input_password):
-            print("Login successful")
+            print("\nLogin successful")
             return [True, input_username]
         else:
-            print("Login failed")
+            print("\nLogin failed")
             return [False, ""]
     elif user_input_number == 2:
         input_username = input("Email: ")
@@ -35,13 +35,13 @@ def main():
             return [False, ""]
         else:
             if createAccount(input_username, input_password):
-                print("Created account successfully")
+                print("\nCreated account successfully")
                 return [True, input_username]
             else:
-                print("Creation failed (Probably the username already exists, try a different one)")
+                print("\nCreation failed (Probably the username already exists, try a different one)")
                 return [False, ""]
     else:
-        print("Invalid input\nFailed")
+        print("\nInvalid input\nFailed")
         return [False, ""]
 
 
