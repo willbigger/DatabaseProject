@@ -7,6 +7,35 @@ https://stackoverflow.com/questions/47873444/how-to-select-50-rows-everytime-fro
 '''
 import mysql.connector
 
+def searchMovies():
+    #string manipulation for the movie title
+    movie_title = input("Please enter the movie name to search: ")
+    movie_title = movie_title.strip().lower()
+
+    conn = mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "",
+        database = "movie_database")
+
+    cursor = conn.cursor()
+
+    searchQuery = f"SELECT movieID, name FROM movie Where lower(name) LIKE '{movie_title}'"
+    cursor.execute(searchQuery)
+    movie_list = cursor.fetchall()
+    
+    print("\nList of matching movies\n\nMovieID: Movie Title")
+    for row in movie_list:
+        print(row[0], end=": ")
+        print(row[1], end=" ")
+
+    if len(movie_list) == 0:
+        print("No matches")
+
+    cursor.close()
+    conn.close()
+
+
 def viewMovies():
     conn = mysql.connector.connect(
         host = "localhost",

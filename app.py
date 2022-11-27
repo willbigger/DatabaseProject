@@ -8,6 +8,24 @@ trys = 3
 main_list = []
 print("Log into App\nYou have 3 tries\n")
 
+
+def pretty_print():
+    #code from https://stackoverflow.com/questions/13214809/pretty-print-2d-list
+    matrix=[
+        ["Choose a number  ", "", "", "", ""],
+        ["0: Exit  ", "1: View All User Profiles  ", "2: View All Movies  ", "3: View All Reviews  ", "4: View All Genres  "], 
+        ["5: Search for a MovieID", "", "", "", ""],
+        ["", "", "", "", ""]
+    ]
+
+    s = [[str(e) for e in row] for row in matrix]
+    lens = [max(map(len, col)) for col in zip(*s)]
+    fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
+    table = [fmt.format(*row) for row in s]
+    print('\n'.join(table))
+    print("\n")
+
+
 while not logged_in and trys > 0:
     print("\nAttempts left: ", trys)
     main_list = userlogin.main()
@@ -25,23 +43,22 @@ print("\nCurrent user email: " + current_user_email + "\n")
 
 while user_input_number != 0:
     if user_input_number == 1:
-        print("-------------------------------------")
-        print("Profile")
-        print("-------------------------------------")
+        user_profile.viewUserProfiles()
     elif user_input_number == 2:
-        input_movie_name = input("Enter movie name \nCase insensitive \nSearch returns movies that contain the words you enter \n\nMovie Name:")
+        movie.ViewMovies()
+    elif user_input_number == 3:
+        review.viewReviews()
+    elif user_input_number == 4:
+        genre.viewGenres()
+    elif user_input_number == 5:
+        movie.searchMovies()
 
-        print("-------------------------------------")
-        print("Database information from database")
-        print("-------------------------------------")
-
-    print("\n\nChoose a number \n0: Exit \n1: View profile \n2: View Movies \n3:Switch Accounts\n\n")
+    pretty_print()
     user_input_number = input("Enter a number: ")
     if len(user_input_number) == 0 or not user_input_number.isdigit():
         user_input_number = 0
         print("Invalid input\nExiting")
     else:
         user_input_number = int(user_input_number)
-    print("\n")
 
 print("\nAll changes saved\nBye!")
