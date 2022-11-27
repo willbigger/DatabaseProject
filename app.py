@@ -6,7 +6,8 @@ Driver for Command Line a loop where each iteration is a action from the user
 logged_in = False
 trys = 3
 main_list = []
-print("Log into App\nYou have 3 tries\n")
+print("\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------")
+print("Log In\n")
 
 
 def pretty_print():
@@ -39,7 +40,7 @@ def pretty_print():
 
 
 while not logged_in and trys > 0:
-    print("\nAttempts left: ", trys)
+    print("\nLogin attempts left: ", trys)
     main_list = userlogin.main()
     logged_in = main_list[0]
     trys -= 1
