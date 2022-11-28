@@ -13,7 +13,6 @@ print("Log In\n")
 def pretty_print():
     #code from https://stackoverflow.com/questions/13214809/pretty-print-2d-list
 
-    # need to add user deletion (maybe require username AND password)
     matrix=[
         ["Choose a number  ", "", "", "", ""],
         ["", "", "", "", ""],
@@ -29,6 +28,9 @@ def pretty_print():
         ["Reviews  ", "", "", "", ""],
         ["26: View All Authors and their reviews  ", "", "", "", ""], 
         ["31: View All Reviews  ", "32: Add a Review  ", "33: Delete a Review  ", "34: Update a Review  ", "35: Like a Review  "], 
+        ["", "", "", "", ""],
+        ["Deleting Your Account  ", "", "", "", ""],
+        ["36: Delete your account (Will also log out and terminate)  ", "", "", "", ""], 
     ]
 
     s = [[str(e) for e in row] for row in matrix]
@@ -53,10 +55,22 @@ else:
     user_input_number = -1
 
 while user_input_number != 0:
+    print("----------------------------------------------------------------------")
+    print("\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------")
+    print("\nCurrent user email: " + current_user_email + "\n")
+    pretty_print()
+    user_input_number = input("Enter a number: ")
+    if len(user_input_number) == 0 or not user_input_number.isdigit():
+        user_input_number = 0
+        print("Invalid input\nExiting")
+    else:
+        user_input_number = int(user_input_number)
+
+
     if user_input_number == 1:
         user_profile.viewUserProfiles()
     elif user_input_number == 2:
-        movie.ViewMovies()
+        movie.viewMovies()
     elif user_input_number == 3:
         genre.viewGenres()
     elif user_input_number == 4:
@@ -104,16 +118,11 @@ while user_input_number != 0:
         review.updateReview()
     elif user_input_number == 35:
         review.likeReview()
-    print("----------------------------------------------------------------------")
-    print("\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------")
-    print("\nCurrent user email: " + current_user_email + "\n")
-    pretty_print()
-    user_input_number = input("Enter a number: ")
-    if len(user_input_number) == 0 or not user_input_number.isdigit():
+
+    elif user_input_number == 36:
+        user_profile.deleteUserProfile(current_user_email)
         user_input_number = 0
-        print("Invalid input\nExiting")
-    else:
-        user_input_number = int(user_input_number)
+    
 
 print("----------------------------------------------------------------------")
 print("\nAll changes saved\nBye!")
