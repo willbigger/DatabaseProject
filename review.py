@@ -5,6 +5,7 @@ https://www.geeksforgeeks.org/extract-data-from-database-using-mysql-connector-a
 https://www.w3schools.com/python/python_mysql_insert.asp
 '''
 import mysql.connector, datetime
+import matrixView
 
 def viewReviews():
     conn = mysql.connector.connect(
@@ -18,9 +19,6 @@ def viewReviews():
     offset = 0
 
     cont = ""
-
-    print("Reviews:")
-    print("Movie ID    Review ID    Movie    Write Date    Number Rating    Comment Text    Number of Likes")
     
     #Gets all data from review in increments of 10
     while cont != 'q':
@@ -28,16 +26,10 @@ def viewReviews():
         
         cursor.execute(query)
         
-        table = cursor.fetchall()
+        review_list = [["MovieID", "Review ID", "Movie", "Write Date", "Number Rating", "Comment Text", "Number of Likes"]]
+        review_list += cursor.fetchall()
         
-        for row in table:
-            print(row[0], end=":    ")
-            print(row[1], end="    ")
-            print(row[6], end="    ")
-            print(row[2], end="    ")
-            print(row[3], end="    ")
-            print(row[4], end="    ")
-            print(row[5], end="\n")
+        matrixView.clean_print(review_list)
 
         cont = input("Enter \'q\' to quit, anything else to continue\n")
         offset += 10

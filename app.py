@@ -14,23 +14,31 @@ def pretty_print():
     #code from https://stackoverflow.com/questions/13214809/pretty-print-2d-list
 
     matrix=[
-        ["Choose a number  ", "", "", "", ""],
+        ["USER ACTIONS:  ", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["General", "", "", "", ""], 
         ["", "", "", "", ""],
         ["0: Exit  ", "", "", "", ""], 
         ["1: View All User Profiles  ", "2: View All Movies  ", "3: View All Genres  ", "4: View All Actors  ", "5: View All Directors  "], 
-        ["6: Add a New Genre  ", "7: Search for MovieID  ", "8: View Movies with Their Genres  ",  "", ""], 
+        ["6: Add a New Genre  ", "7: Search for MovieID (on title)  ", "8: Search for MovieID (on year)  ",  "9: View Movies with Their Genres  ", ""], 
         ["", "", "", "", ""],
-        ["Favorites  ", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["Favorites", "", "", "", ""],
+        ["", "", "", "", ""],
         ["11: Change/Update Favorite Actor  ", "12: Change/Update Favorite Actor  ", "", "", ""],
         ["16: View All Current Favorite Genres  ", "17: Add Favorite Genre  ", "18: Delete Favorite Genre  ", "", ""],
         ["21: View All Current Favorite Movies  ", "22: Add Favorite Movie  ", "23: Delete Favorite Movie  ", "", ""],
         ["", "", "", "", ""],
-        ["Reviews  ", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["Reviews", "", "", "", ""],
+        ["", "", "", "", ""],
         ["26: View All Authors and their reviews  ", "", "", "", ""], 
         ["31: View All Reviews  ", "32: Add a Review  ", "33: Delete a Review  ", "34: Update a Review  ", "35: Like a Review  "], 
         ["", "", "", "", ""],
-        ["Deleting Your Account  ", "", "", "", ""],
-        ["36: Delete your account (Will also log out and terminate)  ", "", "", "", ""], 
+        ["", "", "", "", ""],
+        ["Deleting Your Account", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["36: Delete your account  ", "", "", "", ""], 
     ]
 
     s = [[str(e) for e in row] for row in matrix]
@@ -81,8 +89,10 @@ while user_input_number != 0:
     elif user_input_number == 6:
         genre.addGenre()
     elif user_input_number == 7:
-        movie.searchMovies()
+        movie.searchMoviesName()
     elif user_input_number == 8:
+        movie.searchMoviesYear()
+    elif user_input_number == 9:
         movie_genre.viewMovieGenres()
     
 

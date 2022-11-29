@@ -32,7 +32,7 @@ def viewActors():
         table = cursor.fetchall()
         
         for row in table:
-            print(row[0], end=": ")
+            print(row[0], end=":    ")
             print(row[1], end=" ")
             print(row[2], end="\n")
 

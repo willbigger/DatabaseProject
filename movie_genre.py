@@ -5,6 +5,7 @@ https://www.geeksforgeeks.org/extract-data-from-database-using-mysql-connector-a
 https://www.w3schools.com/python/python_mysql_insert.asp
 '''
 import mysql.connector
+import matrixView
 
 def viewMovieGenres():
     conn = mysql.connector.connect(
@@ -18,9 +19,6 @@ def viewMovieGenres():
     offset = 0
 
     cont = ""
-
-    print("Movie Genres:")
-    print("Movie ID    Genre")
     
     #Gets all data from movie_genre in increments of 50
     while cont != 'q':
@@ -28,11 +26,10 @@ def viewMovieGenres():
         
         cursor.execute(query)
         
-        table = cursor.fetchall()
+        movie_list = [["MovieID", "Genre"]]
+        movie_list += cursor.fetchall()
         
-        for row in table:
-            print(row[0], end=": ")
-            print(row[1], end="\n")
+        matrixView.clean_print(movie_list)
 
         cont = input("Enter \'q\' to quit, anything else to continue\n")
         offset += 50

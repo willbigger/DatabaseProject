@@ -20,7 +20,7 @@ def viewAuthors():
     cont = ""
 
     print("Review Authors:")
-    print("user ID    Review ID")
+    print("User ID    Review ID")
     #Gets all data from authored_by in increments of 50
     while cont != 'q':
         query = "SELECT * FROM authored_by LIMIT 50 OFFSET " + str(offset)

@@ -6,6 +6,7 @@ https://www.w3schools.com/python/python_mysql_insert.asp
 https://stackoverflow.com/questions/47873444/how-to-select-50-rows-everytime-from-mysql-table
 '''
 import mysql.connector
+import matrixView
 
 def viewDirectors():
     conn = mysql.connector.connect(
@@ -32,7 +33,7 @@ def viewDirectors():
         table = cursor.fetchall()
         
         for row in table:
-            print(row[0], end=": ")
+            print(row[0], end=":      ")
             print(row[1], end=" ")
             print(row[2], end="\n")
 
