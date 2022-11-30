@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2022 at 01:59 PM
+-- Generation Time: Nov 30, 2022 at 02:09 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -90395,6 +90395,34 @@ CREATE TABLE `user_passwords` (
 INSERT INTO `user_passwords` (`email`, `password`) VALUES
 ('free@mail.com', '844d8779103b94c18f4aa4cc0c3b4474058580a991fba85d3ca698a0bc9e52c5940feb7a65a3a290e17e6b23ee943ecc4f73e7490327245b4fe5d5efb590feb2'),
 ('ayy8nkz@virginia.edu', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2');
+
+--
+-- Triggers `user_passwords`
+--
+DELIMITER $$
+CREATE TRIGGER `user_passwords_delete` AFTER DELETE ON `user_passwords` FOR EACH ROW BEGIN
+	INSERT INTO user_passwords_audit VALUES (old.email, CURTIME(), 'Delete');
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `user_passwords_insert` AFTER INSERT ON `user_passwords` FOR EACH ROW BEGIN
+	INSERT INTO user_passwords_audit VALUES (new.email, CURTIME(), 'Add');
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_passwords_audit`
+--
+
+CREATE TABLE `user_passwords_audit` (
+  `email` varchar(50) NOT NULL,
+  `changedat` datetime DEFAULT NULL,
+  `action` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
