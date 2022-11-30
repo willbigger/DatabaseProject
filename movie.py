@@ -21,7 +21,7 @@ def searchMoviesName():
 
     cursor = conn.cursor()
 
-    searchQuery = f"SELECT movieID, name FROM movie Where lower(name) LIKE '{movie_title}'"
+    searchQuery = f"SELECT movieID, name FROM movie Where lower(name) LIKE '%{movie_title}%'"
     cursor.execute(searchQuery)
     movie_list = [["MovieID", "Movie Title"]]
     movie_list += cursor.fetchall()
@@ -125,3 +125,4 @@ def addMovie():
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")

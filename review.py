@@ -90,6 +90,7 @@ def addReview(email):
     conn.commit()
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def deleteReview(email):
     viewReviews()
@@ -121,6 +122,7 @@ def deleteReview(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def updateReview():
     viewReviews()
@@ -148,6 +150,7 @@ def updateReview():
     conn.commit()
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def likeReview():
     viewReviews()
@@ -176,3 +179,4 @@ def likeReview():
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")

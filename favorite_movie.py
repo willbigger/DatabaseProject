@@ -69,6 +69,7 @@ def addFavoriteMovies(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def deleteFavoriteMovie(email):
     movieID = input("Please enter the movie ID: ")
@@ -96,3 +97,4 @@ def deleteFavoriteMovie(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")

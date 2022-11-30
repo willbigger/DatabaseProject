@@ -69,6 +69,7 @@ def addFavoriteGenres(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def deleteFavoriteGenre(email):
     genreName = input("Please enter the genre: ")
@@ -96,3 +97,4 @@ def deleteFavoriteGenre(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")

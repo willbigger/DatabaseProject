@@ -87,6 +87,7 @@ def addUserProfile(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def deleteUserProfile(email):
     conn = mysql.connector.connect(
@@ -130,6 +131,7 @@ def deleteUserProfile(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def updateFavoriteActor(email):
     favoriteActor = input("Please enter your new favorite actor: ")
@@ -158,6 +160,7 @@ def updateFavoriteActor(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
 
 def updateFavoriteDirector(email):
     favoriteDirector = input("Please enter your new favorite director: ")
@@ -185,3 +188,4 @@ def updateFavoriteDirector(email):
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
