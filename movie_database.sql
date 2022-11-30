@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2022 at 12:19 AM
+-- Generation Time: Nov 30, 2022 at 01:10 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -38,7 +38,8 @@ CREATE TABLE `authored_by` (
 
 INSERT INTO `authored_by` (`userID`, `reviewID`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -90328,10 +90329,19 @@ CREATE TABLE `review` (
   `reviewID` int(11) NOT NULL,
   `movieID` int(11) DEFAULT NULL,
   `writeDate` datetime DEFAULT NULL,
-  `numberRating` double(2,1) DEFAULT NULL,
+  `numberRating` double(3,1) DEFAULT NULL,
   `commentText` varchar(255) DEFAULT NULL CHECK (octet_length(`commentText`) <> 0),
   `numberOfLikes` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`reviewID`, `movieID`, `writeDate`, `numberRating`, `commentText`, `numberOfLikes`) VALUES
+(1, 5, '2022-11-29 18:20:50', 7.0, 'good enough', 0),
+(2, 2, '2022-11-29 18:22:20', 3.0, 'terrible', 0),
+(3, 19, '2022-11-29 18:29:39', 10.0, 'amazing', 0);
 
 --
 -- Triggers `review`
