@@ -106,7 +106,7 @@ while user_input_number != 0:
     elif user_input_number == 17:
         favorite_genre.addFavoriteGenres(current_user_email)
     elif user_input_number == 18:
-        favorite_genre.deleteFavoriteGenres(current_user_email)
+        favorite_genre.deleteFavoriteGenre(current_user_email)
 
     elif user_input_number == 21:
         favorite_movie.viewFavoriteMovies(current_user_email)
