@@ -26,7 +26,7 @@ def viewReviews():
         
         cursor.execute(query)
         
-        review_list = [["MovieID", "Review ID", "Movie", "Write Date", "Number Rating", "Comment Text", "Number of Likes"]]
+        review_list = [["MovieID", "Review ID", "Write Date", "Number Rating", "Comment Text", "Number of Likes"]]
         review_list += cursor.fetchall()
         
         matrixView.clean_print(review_list)
@@ -70,7 +70,14 @@ def addReview(email):
     insertQuery = "INSERT INTO review (reviewID, movieID, writeDate, numberRating, commentText, numberOfLikes) VALUES (%s, %s, %s, %s, %s, %s)"
 
     values = (newID, movieID, datetime.datetime.now(), numberRating, commentText, 0)
-    cursor.execute(insertQuery, values)
+    try:
+        cursor.execute(insertQuery, values)
+        print("Review added!")
+    except mysql.connector.errors.IntegrityError:
+        print("\nFailed. Comment must contain text\n\nExit")
+        cursor.close()
+        conn.close()
+        return
 
     conn.commit()
 
@@ -81,9 +88,6 @@ def addReview(email):
     cursor.execute(insertQuery, values)
 
     conn.commit()
-    
-    print("Review added!")
-    
     cursor.close()
     conn.close()
 
@@ -135,12 +139,13 @@ def updateReview():
     #Updates review
     query = "UPDATE review SET numberRating = '" + numberRating + "', commentText = '" + commentText + "' WHERE reviewID = " + str(reviewID)
 
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+        print("Review updated!")
+    except mysql.connector.errors.IntegrityError:
+        print("\nFailed. Comment must contain text\n\nExit")
 
     conn.commit()
-    
-    print("Review updated!")
-    
     cursor.close()
     conn.close()
 

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 26, 2022 at 02:44 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost
+-- Generation Time: Nov 30, 2022 at 12:19 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,6 +31,14 @@ CREATE TABLE `authored_by` (
   `userID` int(11) NOT NULL,
   `reviewID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `authored_by`
+--
+
+INSERT INTO `authored_by` (`userID`, `reviewID`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -553,6 +561,18 @@ CREATE TABLE `favorite_genre` (
 CREATE TABLE `favorite_movie` (
   `userID` int(11) NOT NULL,
   `movieID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friends`
+--
+
+CREATE TABLE `friends` (
+  `name` varchar(30) NOT NULL,
+  `major` varchar(10) NOT NULL,
+  `year` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90309,9 +90329,17 @@ CREATE TABLE `review` (
   `movieID` int(11) DEFAULT NULL,
   `writeDate` datetime DEFAULT NULL,
   `numberRating` double(2,1) DEFAULT NULL,
-  `commentText` varchar(255) DEFAULT NULL,
+  `commentText` varchar(255) DEFAULT NULL CHECK (octet_length(`commentText`) <> 0),
   `numberOfLikes` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Triggers `review`
+--
+DELIMITER $$
+CREATE TRIGGER `setZeroLikes` BEFORE INSERT ON `review` FOR EACH ROW SET new.numberOfLikes=0
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -90325,32 +90353,11 @@ CREATE TABLE `user_passwords` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Triggers `user_passwords`
---
-DELIMITER $$
-CREATE TRIGGER `user_passwords_delete` AFTER DELETE ON `user_passwords` FOR EACH ROW BEGIN
-	INSERT INTO user_passwords_audit VALUES (old.email, CURTIME(), 'Delete');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `user_passwords_insert` AFTER INSERT ON `user_passwords` FOR EACH ROW BEGIN
-	INSERT INTO user_passwords_audit VALUES (new.email, CURTIME(), 'Add');
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_passwords_audit`
+-- Dumping data for table `user_passwords`
 --
 
-CREATE TABLE `user_passwords_audit` (
-  `email` varchar(50) NOT NULL,
-  `time` datetime DEFAULT NULL,
-  `action` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `user_passwords` (`email`, `password`) VALUES
+('free@mail.com', '844d8779103b94c18f4aa4cc0c3b4474058580a991fba85d3ca698a0bc9e52c5940feb7a65a3a290e17e6b23ee943ecc4f73e7490327245b4fe5d5efb590feb2');
 
 -- --------------------------------------------------------
 
@@ -90366,6 +90373,13 @@ CREATE TABLE `user_profile` (
   `favoriteActor` varchar(100) DEFAULT NULL,
   `favoriteDirector` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_profile`
+--
+
+INSERT INTO `user_profile` (`userID`, `email`, `firstName`, `lastName`, `favoriteActor`, `favoriteDirector`) VALUES
+(1, 'free@mail.com', 'will', 'bigger', 'chris evans', 'tarantino');
 
 --
 -- Indexes for dumped tables
@@ -90394,6 +90408,12 @@ ALTER TABLE `favorite_genre`
 --
 ALTER TABLE `favorite_movie`
   ADD PRIMARY KEY (`userID`,`movieID`);
+
+--
+-- Indexes for table `friends`
+--
+ALTER TABLE `friends`
+  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `genre`
