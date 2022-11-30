@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2022 at 02:09 PM
+-- Generation Time: Nov 30, 2022 at 02:16 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -562,18 +562,6 @@ CREATE TABLE `favorite_genre` (
 CREATE TABLE `favorite_movie` (
   `userID` int(11) NOT NULL,
   `movieID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `friends`
---
-
-CREATE TABLE `friends` (
-  `name` varchar(30) NOT NULL,
-  `major` varchar(10) NOT NULL,
-  `year` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90424,6 +90412,14 @@ CREATE TABLE `user_passwords_audit` (
   `action` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `user_passwords_audit`
+--
+
+INSERT INTO `user_passwords_audit` (`email`, `changedat`, `action`) VALUES
+('ayy8nkz@virginia.edu', '2022-11-30 08:11:25', 'Delete'),
+('ayy8nkz@virginia.edu', '2022-11-30 08:14:39', 'Add');
+
 -- --------------------------------------------------------
 
 --
@@ -90474,12 +90470,6 @@ ALTER TABLE `favorite_genre`
 --
 ALTER TABLE `favorite_movie`
   ADD PRIMARY KEY (`userID`,`movieID`);
-
---
--- Indexes for table `friends`
---
-ALTER TABLE `friends`
-  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `genre`
