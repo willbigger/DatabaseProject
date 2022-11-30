@@ -62,3 +62,4 @@ def addMovieGenre():
     
     cursor.close()
     conn.close()
+    cont = input("Press Enter to quit")
