@@ -27,7 +27,7 @@ def viewFavoriteMovies(email):
     
     #Gets all data from favorite_movie in increments of 50
     while cont != 'q':
-        query = "SELECT * FROM favorite_movie WHERE userID = " + userID + " LIMIT 50 OFFSET " + str(offset)
+        query = "SELECT * FROM favorite_movie WHERE userID = " + str(userID) + " LIMIT 50 OFFSET " + str(offset)
         
         cursor.execute(query)
         
