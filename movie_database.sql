@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 30, 2022 at 01:10 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2022 at 01:59 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -586,6 +586,32 @@ CREATE TABLE `genre` (
   `genreName` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `genre`
+--
+
+INSERT INTO `genre` (`genreName`, `description`) VALUES
+('Action', 'A motion picture whose storyline involves fast-paced activity and conflict, usually including such elements as a heroic protagonist, violent fights, acrobatic stunts, chase scenes, and gunplay. (Wiktionary)'),
+('Adventure', 'They contain many of the same features of action movies, but are usually set in exotic locations. The main theme is adventure, with the characters often exploring places they have not been before or doing things they have not done before. (Wikipedia)'),
+('Animation', 'Animation is a method by which still figures are manipulated to appear as moving images. (Wikipedia)'),
+('Comedy', 'A drama of light and amusing character and typically with a happy ending (Merriam-Webster)'),
+('Crime', 'Crime fiction describes narratives that center on criminal acts and especially on the investigation, either by an amateur or a professional detective, of a crime, often a murder. (Wikipedia)'),
+('Documentary', 'A non-fictional motion-picture intended to \"document reality, primarily for the purposes of instruction, education or maintaining a historical record\". (Wikipedia)'),
+('Drama', 'Drama is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone. (Wikipedia)'),
+('Family', 'Movies that are safe for entire families to watch.'),
+('Fantasy', 'Fantasy films are films that belong to the fantasy genre with fantastic themes, usually magic, supernatural events, mythology, folklore, or exotic fantasy worlds. (Wikipedia)'),
+('Foreign', 'Movies from abroad, usually with subtitles or dubs so that the audience can understand.'),
+('History', 'Based on a historical narrative, often set in the medieval or early modern past. (Wikipedia)'),
+('Horror', 'Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. (Wikipedia)'),
+('Music', 'Musical film is a film genre in which songs by the characters are interwoven into the narrative, sometimes accompanied by dancing. (Wikipedia)'),
+('Mystery', 'A mystery film is a genre of film that revolves around the solution of a problem or a crime. (Wikipedia)'),
+('Romance', 'Romance movies involve romantic love stories recorded in visual media for broadcast in theatres or on television that focus on passion, emotion, and the affectionate romantic involvement of the main characters. (Wikipedia)'),
+('Science Fiction', 'Science fiction (sometimes shortened to Sci-Fi or SF) is a genre of speculative fiction which typically deals with imaginative and futuristic concepts. (Wikipedia)'),
+('Thriller', 'Thrillers are characterized and defined by the moods they elicit, giving viewers heightened feelings of suspense, excitement, surprise, anticipation and anxiety. (Wikipedia)'),
+('TV Movie', 'Movies that originate from TV shows.'),
+('War', 'War film is a film genre concerned with warfare, typically about naval, air, or land battles, with combat scenes central to the drama. (Wikipedia)'),
+('Western', 'The Western is a genre set in the American frontier and commonly associated with folk tales of the Western United States, particularly the Southwestern United States, as well as Northern Mexico and Western Canada. (Wikipedia)');
 
 -- --------------------------------------------------------
 
@@ -90367,7 +90393,8 @@ CREATE TABLE `user_passwords` (
 --
 
 INSERT INTO `user_passwords` (`email`, `password`) VALUES
-('free@mail.com', '844d8779103b94c18f4aa4cc0c3b4474058580a991fba85d3ca698a0bc9e52c5940feb7a65a3a290e17e6b23ee943ecc4f73e7490327245b4fe5d5efb590feb2');
+('free@mail.com', '844d8779103b94c18f4aa4cc0c3b4474058580a991fba85d3ca698a0bc9e52c5940feb7a65a3a290e17e6b23ee943ecc4f73e7490327245b4fe5d5efb590feb2'),
+('ayy8nkz@virginia.edu', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2');
 
 -- --------------------------------------------------------
 
@@ -90389,7 +90416,8 @@ CREATE TABLE `user_profile` (
 --
 
 INSERT INTO `user_profile` (`userID`, `email`, `firstName`, `lastName`, `favoriteActor`, `favoriteDirector`) VALUES
-(1, 'free@mail.com', 'will', 'bigger', 'chris evans', 'tarantino');
+(1, 'free@mail.com', 'will', 'bigger', 'chris evans', 'tarantino'),
+(2, 'ayy8nkz@virginia.edu', 'Alex', 'Yang', 'Dean Norris', 'Tom Hanks');
 
 --
 -- Indexes for dumped tables
