@@ -22,13 +22,14 @@ def viewMovieGenres():
     
     #Gets all data from movie_genre in increments of 50
     while cont != 'q':
-        query = "SELECT * FROM movie_genre ORDER BY movieID LIMIT 50 OFFSET " + str(offset)
+        query = "SELECT * FROM movie NATURAL JOIN movie_genre ORDER BY movieID LIMIT 50 OFFSET " + str(offset)
         
         cursor.execute(query)
+
+        movie_list = [["Movie ID", "Movie Name", "Runtime", "Release Date", "Genre"]]
         
-        movie_list = [["MovieID", "Genre"]]
         movie_list += cursor.fetchall()
-        
+
         matrixView.clean_print(movie_list)
 
         cont = input("Enter \'q\' to quit, anything else to continue\n")
