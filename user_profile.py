@@ -5,6 +5,7 @@ https://www.geeksforgeeks.org/extract-data-from-database-using-mysql-connector-a
 https://www.w3schools.com/python/python_mysql_insert.asp
 '''
 import mysql.connector
+import matrixView
 
 def viewUserProfiles():
     conn = mysql.connector.connect(
@@ -18,25 +19,27 @@ def viewUserProfiles():
     offset = 0
 
     cont = ""
-
-    print("User Profiles:")
-    print("User ID    Email    First Name    Last Name    Favorite Actor    Favorite Director")
     
     #Gets all data from user_profile in increments of 50
     while cont != 'q':
         query = "SELECT * FROM user_profile ORDER BY userID LIMIT 50 OFFSET " + str(offset)
         
         cursor.execute(query)
+
+        user_list = [["User ID", "Email", "First Name", "Last Name", "Favorite Actor", "Favorite Director"]]
+        user_list += cursor.fetchall()
         
-        table = cursor.fetchall()
+        matrixView.clean_print(user_list)
         
-        for row in table:
-            print(row[0], end=": ")
-            print(row[1], end=" ")
-            print(row[2], end=" ")
-            print(row[3], end=" ")
-            print(row[4], end=" ")
-            print(row[5], end="\n")
+        # table = cursor.fetchall()
+        
+        # for row in table:
+        #     print(row[0], end=": ")
+        #     print(row[1], end=" ")
+        #     print(row[2], end=" ")
+        #     print(row[3], end=" ")
+        #     print(row[4], end=" ")
+        #     print(row[5], end="\n")
 
         cont = input("Enter \'q\' to quit, anything else to continue\n")
         offset += 50

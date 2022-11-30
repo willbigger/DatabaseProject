@@ -25,7 +25,7 @@ def viewGenres():
     print("Genre    Description")
     for row in table:
         print(row[0], end=": ")
-        print(row[1], end="\n")
+        print(row[1], end="\n\n")
 
     cursor.close()
     conn.close()
