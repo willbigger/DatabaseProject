@@ -96,7 +96,6 @@ def createAccount(username, password):
     m. update(password. encode("utf8"))
     hashed_password = m.hexdigest()
 
-    print(hashed_password)
     values = (username, hashed_password)
     cursor.execute(insertQuery, values)
 
