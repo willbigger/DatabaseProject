@@ -27,7 +27,7 @@ def viewFavoriteGenres(email):
     
     #Gets all data from favorite_genre in increments of 50
     while cont != 'q':
-        query = "SELECT * FROM favorite_genre WHERE userID = " + userID + " LIMIT 50 OFFSET " + str(offset)
+        query = "SELECT * FROM favorite_genre WHERE userID = " + str(userID) + " LIMIT 50 OFFSET " + str(offset)
         
         cursor.execute(query)
         
